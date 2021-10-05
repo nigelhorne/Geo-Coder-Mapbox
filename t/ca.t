@@ -16,7 +16,7 @@ CA: {
 			skip('Test requires Internet access', 5);
 		}
 		my $access_token = $ENV{'MAPBOX'};
-		if(!defined($access_token)) {
+		if((!defined($access_token)) || (length($access_token) == 0)) {
 			diag('Set MAPBOX variable to your API key');
 			skip('Set MAPBOX variable to your API key', 5);
 		}

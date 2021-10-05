@@ -107,7 +107,7 @@ sub geocode {
 	$location =~ s/\s/+/g;
 	my %query_parameters = ('access_token' => $self->{'access_token'});
 	if(wantarray) {
-		# moreinfo is needed to find alternatives when the given location is ambiguous
+		# more info is needed to find alternatives when the given location is ambiguous
 		$query_parameters{'moreinfo'} = 1;
 	}
 	$uri->query_form(%query_parameters);
