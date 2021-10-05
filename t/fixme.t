@@ -16,13 +16,9 @@ if($ENV{AUTHOR_TESTING}) {
 		diag('Devel::FIXME required for looking for FIXMEs');
 		done_testing(1);
 	} else {
-		$ENV{'GATEWAY_INTERFACE'} = 'CGI/1.1';
-		$ENV{'REQUEST_METHOD'} = 'GET';
-		$ENV{'QUERY_STRING'} = 'fred=wilma';
-
 		# $Devel::FIXME::REPAIR_INC = 1;
 
-		use_ok('CGI::Info');
+		use_ok('Geo::Coder::Mapbox');
 
 		# ok($messages[0] !~ /lib\/CGI\/Info.pm/);
 		ok(scalar(@messages) == 0);
@@ -36,7 +32,7 @@ if($ENV{AUTHOR_TESTING}) {
 sub Devel::FIXME::rules {
 	sub {
 		my $self = shift;
-		return shout($self) if $self->{file} =~ /lib\/CGI\/Info/;
+		return shout($self) if $self->{file} =~ /lib\/Geo\/Coder\/Mapbox/;
 		return Devel::FIXME::DROP();
 	}
 }
@@ -45,4 +41,3 @@ sub shout {
 	my $self = shift;
 	push @messages, "# FIXME: $self->{text} at $self->{file} line $self->{line}.\n";
 }
-
