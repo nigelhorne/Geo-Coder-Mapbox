@@ -25,14 +25,14 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-      use Geo::Coder::Mapbox;
+    use Geo::Coder::Mapbox;
 
-      my $geo_coder = Geo::Coder::Mapbox->new(access_token => $ENV{'MAPBOX'});
-      my $location = $geo_coder->geocode(location => 'Washington, DC');
+    my $geo_coder = Geo::Coder::Mapbox->new(access_token => $ENV{'MAPBOX'});
+    my $location = $geo_coder->geocode(location => 'Washington, DC');
 
 =head1 DESCRIPTION
 
-Geo::Coder::Mapbox provides an interface to mapbox.com, a free Geo-Coding database covering many countries.
+Geo::Coder::Mapbox provides an interface to mapbox.com, a Geo-Coding database covering many countries.
 
 =head1 METHODS
 
