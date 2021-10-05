@@ -28,7 +28,7 @@ our $VERSION = '0.01';
       use Geo::Coder::Mapbox;
 
       my $geo_coder = Geo::Coder::Mapbox->new();
-      my $location = $geo_coder->geocode(location => '10 Downing St., London, UK');
+      my $location = $geo_coder->geocode(location => 'Washington, DC');
 
 =head1 DESCRIPTION
 
