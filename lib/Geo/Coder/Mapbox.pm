@@ -27,7 +27,7 @@ our $VERSION = '0.01';
 
       use Geo::Coder::Mapbox;
 
-      my $geo_coder = Geo::Coder::Mapbox->new();
+      my $geo_coder = Geo::Coder::Mapbox->new(access_token => $ENV{'MAPBOX'});
       my $location = $geo_coder->geocode(location => 'Washington, DC');
 
 =head1 DESCRIPTION
@@ -71,10 +71,10 @@ sub new {
 
 =head2 geocode
 
-    $location = $geo_coder->geocode(location => $location);
+    $location = $geo_coder->geocode(location => 'Toronto, Ontario, Canada');
 
-    print 'Latitude: ', $location->{'latt'}, "\n";
-    print 'Longitude: ', $location->{'longt'}, "\n";
+    print 'Latitude: ', $location->{features}[0]->{center}[1], "\n";	# Latitude
+    print 'Longitude: ', $location->{features}[0]->{center}[0], "\n";	# Longitude
 
     @locations = $geo_coder->geocode('Portland, USA');
     print 'There are Portlands in ', join (', ', map { $_->{'state'} } @locations), "\n";
@@ -106,10 +106,6 @@ sub geocode {
 	my $uri = URI->new("https://$self->{host}/geocoding/v5/mapbox.places/$location.json");
 	$location =~ s/\s/+/g;
 	my %query_parameters = ('access_token' => $self->{'access_token'});
-	if(wantarray) {
-		# more info is needed to find alternatives when the given location is ambiguous
-		$query_parameters{'moreinfo'} = 1;
-	}
 	$uri->query_form(%query_parameters);
 	my $url = $uri->as_string();
 
