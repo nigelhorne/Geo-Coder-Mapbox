@@ -158,7 +158,7 @@ You can also set your own User-Agent object:
 
     use LWP::UserAgent::Throttled;
     my $ua = LWP::UserAgent::Throttled->new();
-    $ua->throttle({ 'mapbox.com' => 2 });
+    $ua->throttle({ 'api.mapbox.com' => 2 });
     $geo_coder->ua($ua);
 
 =cut
