@@ -57,7 +57,7 @@ sub new {
 
 	my %args = (ref($_[0]) eq 'HASH') ? %{$_[0]} : @_;
 
-	my $ua = delete $args{ua} || LWP::UserAgent->new(agent => __PACKAGE__ . "/$VERSION");
+	my $ua = $args{ua} || LWP::UserAgent->new(agent => __PACKAGE__ . "/$VERSION");
 	# if(!defined($args{'host'})) {
 		# $ua->ssl_opts(verify_hostname => 0);	# Yuck
 	# }
