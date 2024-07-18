@@ -66,6 +66,7 @@ sub new {
 		access_token => ''
 	);
 
+	# Re-seen keys take precedence, so defaults come first
 	return bless { %defaults, %args, ua => $ua }, $class;
 }
 
