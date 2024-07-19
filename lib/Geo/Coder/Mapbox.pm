@@ -27,7 +27,7 @@ our $VERSION = '0.01';
 
     use Geo::Coder::Mapbox;
 
-    my $geo_coder = Geo::Coder::Mapbox->new(access_token => $ENV{'MAPBOX'});
+    my $geo_coder = Geo::Coder::Mapbox->new(access_token => $ENV{'MAPBOX_KEY'});
     my $location = $geo_coder->geocode(location => 'Washington, DC');
 
 =head1 DESCRIPTION
