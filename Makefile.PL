@@ -6,6 +6,14 @@ use IO::Socket::INET;
 
 my $online_tests;
 
+# Test for broken smokers that don't set AUTOMATED_TESTING
+if(my $reporter = $ENV{'PERL_CPAN_REPORTER_CONFIG'}) {
+	if($reporter =~ /smoker/i) {
+		warn 'AUTOMATED_TESTING added for you';
+		$ENV{'AUTOMATED_TESTING'} = 1;
+	}
+}
+
 if($ENV{AUTHOR_TESTING}) {
 	$online_tests = are_online();
 } else {
