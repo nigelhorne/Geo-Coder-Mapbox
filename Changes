@@ -2,6 +2,7 @@ Revision history for Geo-Coder-Mapbox
 
 0.02
 	Use JSON::MaybeXS instead of JSON
+	Calling new on an object now returns a clone rather than setting the defaults in the new object
 
 0.01	Tue Oct  5 17:09:59 EDT 2021
         First draft

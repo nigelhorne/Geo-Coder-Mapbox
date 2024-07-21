@@ -46,16 +46,20 @@ Geo::Coder::Mapbox provides an interface to mapbox.com, a Geo-Coding database co
 =cut
 
 sub new {
-	my $proto = shift;
-	my $class = ref($proto) || $proto;
+	my $class = shift;
+	my %args = (ref($_[0]) eq 'HASH') ? %{$_[0]} : @_;
 
 	# Use Geo::Coder::Mapbox->new(), not Geo::Coder::Mapbox::new()
 	if(!defined($class)) {
-		carp(__PACKAGE__, ' use ->new() not ::new() to instantiate');
-		return;
-	}
+		# carp(__PACKAGE__, ' use ->new() not ::new() to instantiate');
+		# return;
 
-	my %args = (ref($_[0]) eq 'HASH') ? %{$_[0]} : @_;
+		# FIXME: this only works when no arguments are given
+		$class = __PACKAGE__;
+	} elsif(ref($class)) {
+		# clone the given object
+		return bless { %{$class}, %args }, ref($class);
+	}
 
 	my $ua = $args{ua} || LWP::UserAgent->new(agent => __PACKAGE__ . "/$VERSION");
 	# if(!defined($args{'host'})) {
@@ -214,7 +218,7 @@ L<Geo::Coder::GooglePlaces>, L<HTML::GoogleMaps::V3>, L<https://docs.mapbox.com/
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2021 Nigel Horne.
+Copyright 2021-2024 Nigel Horne.
 
 This program is released under the following licence: GPL2
 
