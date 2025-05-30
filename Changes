@@ -2,6 +2,7 @@ Revision history for Geo-Coder-Mapbox
 
 0.03
 	geocode(): croak when input is just a set of numbers
+	Sanitise no_network_testing
 
 0.02	Sun Jul 21 07:45:55 EDT 2024
 	Use JSON::MaybeXS instead of JSON

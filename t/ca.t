@@ -2,8 +2,9 @@
 
 use warnings;
 use strict;
-use Test::Most tests => 7;
-use Test::NoWarnings;
+use Test::Most;
+use Test::Needs 'Test::Number::Delta';
+use Test::RequiresInternet ('api.mapbox.com' => 'https');
 
 BEGIN {
 	use_ok('Geo::Coder::Mapbox');
@@ -13,24 +14,15 @@ CA: {
 	SKIP: {
 		if(!-e 't/online.enabled') {
 			diag('Online tests disabled');
-			skip('Test requires Internet access', 5);
+			skip('Test requires Internet access');
 		}
 		my $access_token = $ENV{'MAPBOX_KEY'};
 		if((!defined($access_token)) || (length($access_token) == 0)) {
 			diag('Set MAPBOX_KEY variable to your API key');
-			skip('Set MAPBOX_KEY variable to your API key', 5);
+			skip('Set MAPBOX_KEY variable to your API key');
 		}
 
-		eval {
-			require Test::Number::Delta;
-
-			Test::Number::Delta->import();
-		};
-
-		if($@) {
-			diag('Test::Number::Delta not installed - skipping tests');
-			skip('Test::Number::Delta not installed', 5);
-		}
+		Test::Number::Delta->import();
 
 		my $ua;
 
@@ -64,3 +56,5 @@ CA: {
 		like($address->{features}[0]->{place_name}, qr/Richibucto/i, 'test reverse, lnglat implied');
 	}
 }
+
+done_testing();
